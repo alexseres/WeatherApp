@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace WeatherForecast.Models
@@ -8,6 +9,8 @@ namespace WeatherForecast.Models
     {
         public string Name { get; set; }
         public int ID { get; set; }
-        public string Kelvin { get; set; }
+        public decimal Kelvin { get; set; }
+
+        public ObservableCollection<Dictionary<string, decimal>> TemperatureOfNext7week { get; set; }
     }
 }
