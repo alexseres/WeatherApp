@@ -18,6 +18,20 @@ namespace WeatherForecast.ViewModels
             throw new NotImplementedException();
         }
 
+        //creates new command
+        public RelayCommand(Action<object> execute, bool canExecute) : this(execute, null) { }
+
+        private RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        {
+            if(execute == null)
+            {
+                throw new ArgumentNullException();
+            }
+            this._execute = execute;
+            this._canExecute = canExecute;
+        }
+        
+
         public void Execute(object parameter)
         {
             throw new NotImplementedException();
