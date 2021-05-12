@@ -13,14 +13,13 @@ namespace WeatherForecast.ViewModels
         private readonly Predicate<object> _canExecute;
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
-        {
-            throw new NotImplementedException();
-        }
-
-        //creates new command
         public RelayCommand(Action<object> execute, bool canExecute) : this(execute, null) { }
 
+        /// <summary>
+        /// creates new command
+        /// </summary>
+        /// <param name="execute">execution logic</param>
+        /// <param name="canExecute">can it be executed</param>
         private RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if(execute == null)
@@ -30,6 +29,15 @@ namespace WeatherForecast.ViewModels
             this._execute = execute;
             this._canExecute = canExecute;
         }
+
+        
+        public bool CanExecute(object parameter)
+        {
+            //pick up the changes that could affect outcome our canexecute
+            return _canExecute == null ? true : _canExecute(parameter);
+        }
+
+
         
 
         public void Execute(object parameter)
