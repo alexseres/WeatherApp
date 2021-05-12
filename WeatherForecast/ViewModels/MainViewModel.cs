@@ -16,7 +16,21 @@ namespace WeatherForecast.ViewModels
             {
                 ID = 3,
                 Name = "Budapest",
-                Kelvin = 300
+                Kelvin = 300,
+                TemperatureOfNext7week = new ObservableCollection<Dictionary<string, decimal>>
+                {
+                    new Dictionary<string, decimal>()
+                    {
+                        {"Monday", 350 },
+                        {"Tuesday", 390 },
+                        {"Wednesday", 400 },
+                        {"Thursday", 360 },
+                        {"Friday", 450 },
+                        {"Saturday", 500 },
+                        {"Sunday",480 }
+
+                    }
+                }
             };
 
         }
