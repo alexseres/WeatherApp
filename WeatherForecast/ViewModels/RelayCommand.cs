@@ -11,7 +11,6 @@ namespace WeatherForecast.ViewModels
     {
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;
-        public event EventHandler CanExecuteChanged;
 
         public RelayCommand(Action<object> execute, bool canExecute) : this(execute, null) { }
 
@@ -29,16 +28,20 @@ namespace WeatherForecast.ViewModels
             this._execute = execute;
             this._canExecute = canExecute;
         }
-
         
+        public event EventHandler CanExecuteChanged
+        {
+            //pick up the changes that could affect outcome our canexecute
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
         public bool CanExecute(object parameter)
         {
             //pick up the changes that could affect outcome our canexecute
             return _canExecute == null ? true : _canExecute(parameter);
         }
 
-
-        
 
         public void Execute(object parameter)
         {
