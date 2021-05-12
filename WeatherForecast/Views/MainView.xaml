@@ -9,17 +9,22 @@
       Title="MainView">
 
     <Grid>
-        <ItemsControl ItemsSource="{Binding Dicti}">
+
+
+        <ItemsControl ItemsSource="{Binding Path=Dicti}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Canvas Background="LightCyan">
-                        <Rectangle Canvas.Left="525" Canvas.Top="225" Height="200" Width="42" Fill="Green" Panel.ZIndex="3" />
-                    </Canvas>
+                    <TextBlock Text="{Binding Path=Value}"></TextBlock>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         
-        
+
 
     </Grid>
 </Page>
