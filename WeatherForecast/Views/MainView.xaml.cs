@@ -21,6 +21,7 @@ namespace WeatherForecast.Views
         public MainView()
         {
             InitializeComponent();
+
         }
     }
 }
