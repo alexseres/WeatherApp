@@ -42,7 +42,7 @@ namespace WeatherForecast.ViewModels
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            _execute.Invoke(parameter);
         }
     }
 }
