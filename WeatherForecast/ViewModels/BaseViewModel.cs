@@ -6,7 +6,8 @@ using System.Text;
 
 namespace WeatherForecast.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    //supports bindings when the source changes dynamically
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -18,6 +19,14 @@ namespace WeatherForecast.ViewModels
             stored = newValue;
             OnPropertyChanged(propertyName);
             return true;
+        }
+
+        //this raises the event 
+        private void OnPropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            PropertyChangedEventHandler changed = PropertyChanged;
+            if (changed == null) return;
+            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
