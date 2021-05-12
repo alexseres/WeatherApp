@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\lilaa\source\repos\WeatherForecast\WeatherForecast\App.xaml
-11407045341
+11256845736
 
-7-948161953
+7922941732
 192-1533232326
-MainWindow.xaml;
+Views\MainView.xaml;
 
-False
+True
 
