@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeatherForecast.ViewModels;
 
 namespace WeatherForecast.Views
 {
@@ -18,10 +19,11 @@ namespace WeatherForecast.Views
     /// </summary>
     public partial class MainView : Page
     {
+        public MainViewModel _viewmodel;
         public MainView()
         {
             InitializeComponent();
-
+            DataContext = _viewmodel;
         }
     }
 }
