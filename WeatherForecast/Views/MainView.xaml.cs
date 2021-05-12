@@ -23,6 +23,7 @@ namespace WeatherForecast.Views
         public MainView()
         {
             InitializeComponent();
+            _viewmodel = new MainViewModel();
             DataContext = _viewmodel;
         }
     }

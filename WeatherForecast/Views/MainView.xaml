@@ -9,6 +9,17 @@
       Title="MainView">
 
     <Grid>
+        <ItemsControl ItemsSource="{Binding Dicti}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Canvas Background="LightCyan">
+                        <Rectangle Canvas.Left="525" Canvas.Top="225" Height="200" Width="42" Fill="Green" Panel.ZIndex="3" />
+                    </Canvas>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
         
+        
+
     </Grid>
 </Page>
