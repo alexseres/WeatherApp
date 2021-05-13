@@ -12,13 +12,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <StackPanel>
+                <TextBlock Text="{Binding Path=City.Name}"/>
+            </StackPanel>
+        </Grid>
+        
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
             <ItemsControl ItemsSource="{Binding Path=Dicti}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -27,9 +32,12 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="15" Height="50" Grid.Row="0">
-                            <TextBlock Text="{Binding Path=Value}"></TextBlock>
-                        </Border>
+                        <StackPanel>
+                            <Border BorderBrush="Black" BorderThickness="1" Margin="10" Padding="15" Height="50" Grid.Row="0">
+                                <TextBlock Text="{Binding Path=Value}"></TextBlock>
+                            </Border>
+                            <TextBlock Text="{Binding Path=Key}"></TextBlock>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
