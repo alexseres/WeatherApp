@@ -35,7 +35,7 @@ namespace WeatherForecast.ViewModels
             };
             Dicti = new Dictionary<string, decimal>()
             {
-                {"Monday", -4 },
+                {"Monday", 30},
                 {"Tuesday", 39 },
                 {"Wednesday", 40 },
                 {"Thursday", 36 },
