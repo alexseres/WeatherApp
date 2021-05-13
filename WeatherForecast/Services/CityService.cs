@@ -22,9 +22,9 @@ namespace WeatherForecast.Services
             //return city;
         }
 
-        public async Task<ForecastDays> GetNextDays(int cityID)
+        public async Task<ForecastDays> GetNextDays(float lat, float lon)
         {
-            return await ClientManager.GetNextDayWeathers<ForecastDays>(cityID);
+            return await ClientManager.GetNextDayWeathers<ForecastDays>(lat, lon);
         }
 
         

@@ -16,6 +16,8 @@ namespace WeatherForecast.Models
         public Temperature Kelvin { get; set; }
         [JsonProperty("weather")]
         public List<Weather> Weathers { get; set; }
+        [JsonProperty("coord")]
+        public Coordinates Coordinates { get; set; }
 
         public Weather Weather { get; set; }
 

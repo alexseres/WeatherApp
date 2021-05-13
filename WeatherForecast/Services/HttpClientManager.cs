@@ -33,7 +33,6 @@ namespace WeatherForecast.Services
         public async Task<T> GetNextDayWeathers<T>(float lat, float lon)
         {
             string url = Configs.NextDaysUrl;
-            int numberOFDays = 6;
             var request = new HttpRequestMessage
             {
                 RequestUri = new Uri($"{url}lat={lat}&lon={lon}&appid={apiKey}")
@@ -49,6 +48,7 @@ namespace WeatherForecast.Services
                 response.EnsureSuccessStatusCode();
                 string body = await response.Content.ReadAsStringAsync();
                 T item = JsonConverters<T>.JsonConverter(body);
+                object item2 = JsonConverters<object>.JsonConverter(body);
                 return item;
             }
         }

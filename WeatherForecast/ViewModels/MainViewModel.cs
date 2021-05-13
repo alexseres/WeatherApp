@@ -31,7 +31,7 @@ namespace WeatherForecast.ViewModels
             try
             {
                 City = await Service.GetCity("London");
-                ForecastDays = await Service.GetNextDays(City.ID);
+                ForecastDays = await Service.GetNextDays(City.Coordinates.Latitude, City.Coordinates.Latitude);
                 return true;
             }
             catch (Exception ex)

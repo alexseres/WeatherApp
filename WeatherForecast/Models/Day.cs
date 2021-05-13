@@ -5,9 +5,12 @@ using System.Text;
 
 namespace WeatherForecast.Models
 {
-    public class Temperature
+    public class Day
     {
+        [JsonProperty("dt")]
+        public int ExactDay { get; set; }
+
         [JsonProperty("temp")]
-        public decimal Kelvin { get; set; }
+        public List<Temperature> Temperature { get; set; }
     }
 }

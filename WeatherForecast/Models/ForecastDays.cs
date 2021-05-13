@@ -9,7 +9,7 @@ namespace WeatherForecast.Models
     {
         public City City { get; set; }
 
-        [JsonProperty("message")]
-        public string Message { get; set; }
+        [JsonProperty("daily")]
+        public List<Day> Days { get; set; }
     }
 }
