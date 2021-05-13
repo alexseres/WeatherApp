@@ -11,6 +11,8 @@ namespace WeatherForecast.Services
 {
     public class HttpClientManager<T> :IHttpManager<T>
     {
+        private string url = Configs.CityUrl;
+        private string apiKey = Configs.ApiKey;
         private HttpClient _client;
         public HttpClient Client { get { return _client; } set { _client = value; } }
         public HttpClientManager()
@@ -20,38 +22,31 @@ namespace WeatherForecast.Services
 
         public async Task<T> RequestForItem(string cityName)
         {
-            //sending a request to the API to get the requested city and trying to deserialize it 
-            string url = Configs.CityUrl;
-            string apiKey = Configs.ApiKey;
-            
-            try
+            //Creating request
+            var request = new HttpRequestMessage
             {
-                var request = new HttpRequestMessage
-                {
-                    //building the request
-                    RequestUri = new Uri($"{url}?q={cityName}&appid={apiKey}")
-                };
-                using (var response = await Client.SendAsync(request))
-                {
-                    response.EnsureSuccessStatusCode();
-                    string body = await response.Content.ReadAsStringAsync();
-                    T item = JsonConverters<T>.JsonConverter(body);
-                    return item;
-                }
-
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw new Exception();
-            }
-
+                RequestUri = new Uri($"{url}?q={cityName}&appid={apiKey}")
+            };
+            return await ProcessingRequestForObject(request);
         }
 
-        public Dictionary<string, decimal> GetNextDayWeathers(string cityName)
+        public Dictionary<string, decimal> GetNextDayWeathers(int cityID)
         {
-            throw new NotImplementedException();
+
         }
+
+        public async Task<T> ProcessingRequestForObject(HttpRequestMessage request)
+        {
+            //send the created request and deserialzie it
+            using (var response = await Client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                string body = await response.Content.ReadAsStringAsync();
+                T item = JsonConverters<T>.JsonConverter(body);
+                return item;
+            }
+        }
+
     }
 
 }

@@ -17,7 +17,11 @@ namespace WeatherForecast.Services
         public async Task<City> GetCity(string cityName)
         {
             var city = await ClientManager.RequestForItem(cityName);
-            return new City { };
+            long num = 1436022000;
+            var e = DateTimeOffset.FromUnixTimeSeconds(num );
+            return city;
         }
+
+        
     }
 }
