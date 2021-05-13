@@ -30,9 +30,13 @@ namespace WeatherForecast.Services
             return await ProcessingRequestForObject(request);
         }
 
-        public Dictionary<string, decimal> GetNextDayWeathers(int cityID)
+        public async Task<T> GetNextDayWeathers(int cityID)
         {
-            
+            var request = new HttpRequestMessage
+            {
+                RequestUri = new Uri($"{url}?id={cityID}&appid={apiKey}")
+            };
+            return await ProcessingRequestForObject(request);
         }
 
         public async Task<T> ProcessingRequestForObject(HttpRequestMessage request)

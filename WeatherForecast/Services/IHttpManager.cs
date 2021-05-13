@@ -9,6 +9,6 @@ namespace WeatherForecast.Services
     public interface IHttpManager<T>
     {
         Task<T> RequestForItem(string Name);
-        Dictionary<string, decimal> GetNextDayWeathers(string cityName);
+        Task<T> GetNextDayWeathers(int cityID);
     }
 }
