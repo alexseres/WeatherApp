@@ -19,6 +19,5 @@ namespace WeatherForecast.Models
 
         public Weather Weather { get; set; }
 
-        public ObservableCollection<Dictionary<string, decimal>> TemperatureOfNext7week { get; set; }
     }
 }

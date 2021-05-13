@@ -32,7 +32,7 @@ namespace WeatherForecast.Services
 
         public Dictionary<string, decimal> GetNextDayWeathers(int cityID)
         {
-
+            
         }
 
         public async Task<T> ProcessingRequestForObject(HttpRequestMessage request)
