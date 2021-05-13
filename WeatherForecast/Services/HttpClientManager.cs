@@ -11,7 +11,6 @@ namespace WeatherForecast.Services
 {
     public class HttpClientManager :IHttpManager
     {
-        private string url = Configs.CityUrl;
         private string apiKey = Configs.ApiKey;
         private HttpClient _client;
         public HttpClient Client { get { return _client; } set { _client = value; } }
@@ -22,6 +21,7 @@ namespace WeatherForecast.Services
 
         public async Task<T> RequestForItem<T>(string cityName)
         {
+            string url = Configs.CityUrl;
             //Creating request
             var request = new HttpRequestMessage
             {
@@ -30,11 +30,13 @@ namespace WeatherForecast.Services
             return await ProcessingRequestForObject<T>(request);
         }
 
-        public async Task<T> GetNextDayWeathers<T>(int cityID)
+        public async Task<T> GetNextDayWeathers<T>(float lat, float lon)
         {
+            string url = Configs.NextDaysUrl;
+            int numberOFDays = 6;
             var request = new HttpRequestMessage
             {
-                RequestUri = new Uri($"{url}?id={cityID}&appid={apiKey}")
+                RequestUri = new Uri($"{url}lat={lat}&lon={lon}&appid={apiKey}")
             };
             return await ProcessingRequestForObject<T>(request);
         }
