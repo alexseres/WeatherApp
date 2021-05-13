@@ -8,7 +8,7 @@ namespace WeatherForecast.Services
 {
     public interface IHttpManager<T>
     {
-        Task<T> GetItem(string Name);
+        Task<T> RequestForItem(string Name);
         Dictionary<string, decimal> GetNextDayWeathers(string cityName);
     }
 }

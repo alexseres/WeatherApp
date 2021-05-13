@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using WeatherForecast.Models;
+using WeatherForecast.Services;
 
 namespace WeatherForecast.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
         private City _city;
-        public City City { get { return _city; } set { SetProperty(ref _city, value); } } 
+        public City City { get { return _city; } set { SetProperty(ref _city, value); } }
+        public IHttpManager<object> Service { get; set; }
+        
 
         public Dictionary<string,decimal> Dicti { get; set; }
         public MainViewModel()
         {
+            Service = new HttpClientManager<object>();
+            var city = Service.GetItem<object>("London");
+
             City = new City
             {
                 ID = 3,

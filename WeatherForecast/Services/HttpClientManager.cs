@@ -13,12 +13,12 @@ namespace WeatherForecast.Services
     {
         private HttpClient _client;
         public HttpClient Client { get { return _client; } set { _client = value; } }
-        public HttpClientManager(HttpClient client)
+        public HttpClientManager()
         {
-            Client = client;
+            Client = new HttpClient();
         }
 
-        public async Task<T> GetItem(string cityName)
+        public async Task<T> RequestForItem(string cityName)
         {
             //sending a request to the API to get the requested city and trying to deserialize it 
             string url = Configs.CityUrl;
