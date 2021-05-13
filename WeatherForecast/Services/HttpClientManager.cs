@@ -29,7 +29,6 @@ namespace WeatherForecast.Services
                 var request = new HttpRequestMessage
                 {
                     //building the request
-                    //RequestUri = new Uri("https://api.openweathermap.org/data/2.5/weather?q=London&appid=e34c777bb1b5f32880f63683d74ad86d"),
                     RequestUri = new Uri($"{url}?q={cityName}&appid={apiKey}")
                 };
                 using (var response = await Client.SendAsync(request))

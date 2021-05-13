@@ -11,10 +11,12 @@ namespace WeatherForecast.Models
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("id")]
-        public int ID { get; set; }  
+        public int ID { get; set; }
         [JsonProperty("main")]
         public Temperature Kelvin { get; set; }
         [JsonProperty("weather")]
+        public List<Weather> Weathers { get; set; }
+
         public Weather Weather { get; set; }
 
         public ObservableCollection<Dictionary<string, decimal>> TemperatureOfNext7week { get; set; }

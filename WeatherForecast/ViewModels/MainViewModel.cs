@@ -11,13 +11,13 @@ namespace WeatherForecast.ViewModels
     {
         private City _city;
         public City City { get { return _city; } set { SetProperty(ref _city, value); } }
-        public IHttpManager<object> ClientManager { get; set; }
+        public IHttpManager<City> ClientManager { get; set; }
         public CityService Service { get; set; }
 
         public Dictionary<string,decimal> Dicti { get; set; }
         public MainViewModel()
         {
-            ClientManager = new HttpClientManager<object>();
+            ClientManager = new HttpClientManager<City>();
             Service = new CityService(ClientManager);
             var city = Service.GetCity("London");
             
