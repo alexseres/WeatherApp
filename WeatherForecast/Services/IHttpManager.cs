@@ -6,9 +6,9 @@ using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
 {
-    public interface IHttpManager<T>
+    public interface IHttpManager
     {
-        Task<T> RequestForItem(string Name);
-        Task<T> GetNextDayWeathers(int cityID);
+        Task<T> RequestForItem<T>(string Name);
+        Task<T> GetNextDayWeathers<T>(int cityID);
     }
 }

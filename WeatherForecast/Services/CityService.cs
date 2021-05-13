@@ -8,19 +8,26 @@ namespace WeatherForecast.Services
 {
     public class CityService
     {
-        public IHttpManager<City> ClientManager { get; set; }
-        public CityService(IHttpManager<City> manager)
+        public IHttpManager ClientManager { get; set; }
+        public CityService(IHttpManager manager)
         {
             ClientManager = manager;
         }
 
         public async Task<City> GetCity(string cityName)
         {
-            var city = await ClientManager.RequestForItem(cityName);
-            long num = 1436022000;
-            var e = DateTimeOffset.FromUnixTimeSeconds(num );
-            return city;
+            return await ClientManager.RequestForItem<City>(cityName);
+            //long num = 1436022000;
+            //var e = DateTimeOffset.FromUnixTimeSeconds(num );
+            //return city;
         }
+
+        public async Task<ForecastDays> GetNextDays(int cityID)
+        {
+            return await ClientManager.GetNextDayWeathers<ForecastDays>(cityID);
+        }
+
+        
 
         
     }
