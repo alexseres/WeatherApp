@@ -35,7 +35,7 @@ namespace WeatherForecast.ViewModels
             };
             Dicti = new Dictionary<string, decimal>()
             {
-                {"Monday", 35 },
+                {"Monday", -4 },
                 {"Tuesday", 39 },
                 {"Wednesday", 40 },
                 {"Thursday", 36 },
@@ -47,22 +47,3 @@ namespace WeatherForecast.ViewModels
         }
     }
 }
-/*
-        < ItemsControl ItemsSource = "{Binding Dicti}" >
- 
-             < ItemsControl.ItemTemplate >
- 
-                 < DataTemplate >
- 
-                     < Canvas Background = "LightCyan" >
-  
-                          < Rectangle Canvas.Left = "525" Canvas.Top = "225" Height = "200" Width = "42" Fill = "Green" Panel.ZIndex = "3" />
-             
-                                 </ Canvas >
-             
-                             </ DataTemplate >
-             
-                         </ ItemsControl.ItemTemplate >
-             
-                     </ ItemsControl >
-        */
