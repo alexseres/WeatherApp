@@ -5,9 +5,9 @@ using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
 {
-    public interface IHttpManager
+    public interface IHttpManager<T>
     {
-        City GetCity(string cityName);
+        T GetCity(string cityName);
         Dictionary<string, decimal> GetNextDayWeathers(string cityName);
     }
 }

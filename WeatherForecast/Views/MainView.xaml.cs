@@ -26,24 +26,9 @@ namespace WeatherForecast.Views
             InitializeComponent();
             _viewmodel = new MainViewModel();
             DataContext = _viewmodel;
-            checker();
-        }
-
-        public async void checker()
-        {
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
-            {
-                RequestUri = new Uri("https://api.openweathermap.org/data/2.5/weather?q=London&appid=e34c777bb1b5f32880f63683d74ad86d"),
-
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                var body = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(body);
-            }
 
         }
+
+
     }
 }
