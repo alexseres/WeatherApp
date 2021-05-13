@@ -13,7 +13,7 @@ namespace WeatherForecast.Models
         [JsonProperty("id")]
         public int ID { get; set; }
         [JsonProperty("main")]
-        public Temperature Kelvin { get; set; }
+        public CityTemperature Kelvin { get; set; }
         [JsonProperty("weather")]
         public List<Weather> Weathers { get; set; }
         [JsonProperty("coord")]

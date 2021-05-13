@@ -11,6 +11,6 @@ namespace WeatherForecast.Models
         public int ExactDay { get; set; }
 
         [JsonProperty("temp")]
-        public List<Temperature> Temperature { get; set; }
+        public ForecastDaysTemperature Temperature { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using WeatherForecast.Converters;
 using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
@@ -16,10 +17,9 @@ namespace WeatherForecast.Services
 
         public async Task<City> GetCity(string cityName)
         {
-            return await ClientManager.RequestForItem<City>(cityName);
-            //long num = 1436022000;
-            //var e = DateTimeOffset.FromUnixTimeSeconds(num );
-            //return city;
+            var city = await ClientManager.RequestForItem<City>(cityName);
+            var converted = DayConverter.EpochToDate(city.Kelvin.Kelvin);
+            return city;
         }
 
         public async Task<ForecastDays> GetNextDays(float lat, float lon)
