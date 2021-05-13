@@ -1,16 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace WeatherForecast.Models
 {
-    public class Day
+    public class DayDTO
     {
         [JsonProperty("dt")]
         public int ExactDay { get; set; }
 
         [JsonProperty("temp")]
-        public ForecastDaysTemperature Temperature { get; set; }
+        public ForecastDaysTemperatureDTO Temperature { get; set; }
     }
 }

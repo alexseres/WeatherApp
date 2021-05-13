@@ -5,9 +5,9 @@ using System.Text;
 
 namespace WeatherForecast.Models
 {
-    public class ForecastDaysTemperature
+    public class CityTemperatureDTO
     {
-        [JsonProperty("day")]
-        public decimal Kelvin { get; set; }
+        [JsonProperty("temp")]
+        public decimal Temperature { get; set; }
     }
 }

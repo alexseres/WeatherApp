@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WeatherForecast.Models
 {
-    public struct Coordinates
+    public struct CoordinatesDTO
     {
         [JsonProperty("lon")]
         public float Longitude { get; set; }

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace WeatherForecast.Models
 {
-    public class ForecastDays
+    public class ForecastDaysDTO
     {
         public City City { get; set; }
 
         [JsonProperty("daily")]
-        public List<Day> Days { get; set; }
+        public List<DayDTO> Days { get; set; }
     }
 }

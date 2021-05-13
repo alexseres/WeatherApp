@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using WeatherForecast.Converters;
 using WeatherForecast.Models;
 using WeatherForecast.Services;
 
@@ -24,6 +25,11 @@ namespace WeatherForecast.ViewModels
             ClientManager = new HttpClientManager();
             Service = new CityService(ClientManager);
             TryGettingMainProperties();
+        }
+
+        public void ConvertTemperatures()
+        {
+            City.Temperature.Temperature = KelvinConverter.ConvertKelvinToCelsius(City.Temperature.Temperature);
         }
 
         public async Task<bool> TryGettingMainProperties()
