@@ -14,8 +14,7 @@ namespace WeatherForecast.ViewModels
         private City _city;
         public City City { get { return _city; } set { SetProperty(ref _city, value); } }
 
-        private ForecastDays _forecastDays;
-        public ForecastDays ForecastDays { get { return _forecastDays; } set { SetProperty(ref _forecastDays, value); } }
+
         public IHttpManager ClientManager { get; set; }
         public CityService Service { get; set; }
 

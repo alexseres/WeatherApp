@@ -26,10 +26,26 @@ namespace WeatherForecast.Services
         }
 
 
-        public async City CreateObject(string cityName)
+        public async Task<(CityDTO,ForecastDaysDTO)> GetObjects(string cityName)
         {
-            var cityDTO = await GetCity(cityName);
-            ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
+            try
+            {
+                CityDTO cityDTO = await GetCity(cityName);
+                ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
+                return (cityDTO, daysDTO);
+            }
+            catch (ArgumentNullException ex)
+            {
+                throw new ArgumentException();
+                Console.WriteLine(ex);
+            }
+
+            
+        }
+
+        public async Task<City> CreateObject(string cityName)
+        {
+            (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
             City city = new City
             {
                 Name = cityDTO.Name,
@@ -38,7 +54,7 @@ namespace WeatherForecast.Services
                 Weather = cityDTO.Weathers[0].ToString()
             };
             List<Day> days = new List<Day>();
-            foreach(var dayDTO in daysDTO.Days)
+            foreach (var dayDTO in daysDTO.Days)
             {
                 Day day = new Day()
                 {
@@ -49,7 +65,6 @@ namespace WeatherForecast.Services
             }
             city.Days = days;
             return city;
-
 
         }
 
