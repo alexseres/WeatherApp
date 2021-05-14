@@ -47,12 +47,12 @@ namespace WeatherForecast.Services
             (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
             try
             {
-                City city = new City
+                 City city = new City
                 {
                     Name = cityDTO.Name,
                     ID = cityDTO.ID,
                     Temperature = KelvinConverter.ConvertKelvinToCelsius(cityDTO.Temperature.Temperature),
-                    Weather = cityDTO.Weathers[0].ToString(),
+                    Weather = cityDTO.Weathers[0].CurrentWeather,
                     Date = DayConverter.EpochToDate(cityDTO.Date),
                     
                 };

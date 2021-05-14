@@ -15,17 +15,25 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
+            
+            
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding Path=City.Name}" />
+                <TextBlock Text="{Binding Path=City.DayOfTheWeek}" />
+                <TextBlock Text="{Binding Path=City.Temperature}"/>
+                <TextBlock Text="{Binding Path=City.Weather}"/>
+            </StackPanel>
 
-
-            <Canvas Margin="400,0,5,10" >
-                <TextBlock Height="133" Width="198" Canvas.Left="198" Canvas.Top="10"/>
-                <TextBlock Canvas.Left="10" Canvas.Top="10" Text="TextBlock" TextWrapping="Wrap" Height="66" Width="114"/>
-                <TextBlock Canvas.Top="76" Text="TextBlock" TextWrapping="Wrap" Height="52" Width="133"/>
-                <TextBlock Canvas.Top="133" Text="TextBlock" TextWrapping="Wrap" Height="43" Width="124"/>
-            </Canvas>
         </Grid>
-
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -49,7 +57,6 @@
                         <StackPanel Margin="10, 10, 10 80" VerticalAlignment="Bottom">
                             <Border Name="br" Margin="3,10,3,10"  CornerRadius="5" 
                                 Background="SlateGray" Width="20" BorderBrush="Aqua" BorderThickness="3" Height="{Binding Temperature}">
-
                             </Border>
                             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Width="30"
                                        FontFamily="Latha" Text="{Binding Path=Temperature}">
