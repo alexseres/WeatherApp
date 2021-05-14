@@ -42,7 +42,6 @@ namespace WeatherForecast.Services
             }
         }
 
-
         public async Task<City> CreateCityObject(string cityName)
         {
             (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
@@ -68,8 +67,7 @@ namespace WeatherForecast.Services
         }
         public ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO)
         {
-            //we need first day checker in order to get rid of the actual day, because we got that in the City object
-
+            //we need firstdaychecker in order to get rid of the actual day, because we got that in the City object
 
             ObservableCollection<Day> days = new ObservableCollection<Day>();
             int firstDayChecker = 0;
@@ -83,7 +81,7 @@ namespace WeatherForecast.Services
                 Day day = new Day()
                 {
                     ExactDay = DayConverter.EpochToDate(dayDTO.ExactDay),
-                    Temperature = dayDTO.Temperature.Temperature,
+                    Temperature = KelvinConverter.ConvertKelvinToCelsius(dayDTO.Temperature.Temperature),
                     WeatherDescription = dayDTO.Description[0].Description
                 };
                 day.DayOfTheWeek = day.ExactDay.DayOfWeek.ToString();

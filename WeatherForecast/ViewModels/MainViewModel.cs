@@ -11,10 +11,13 @@ namespace WeatherForecast.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        private int _doubleTemperatureForDisplay;
+        public int DoubleTemperature { get { return _doubleTemperatureForDisplay; } set { SetProperty(ref _doubleTemperatureForDisplay, value); } }
+
         private City _city;
         public City City { get { return _city; } set { SetProperty(ref _city, value); } }
 
-        private ObservableCollection<Day> _days;
+        private ObservableCollection<Day> _days; 
         public ObservableCollection<Day> Days { get { return _days; } set { SetProperty(ref _days, value); } }
 
         public IHttpManager ClientManager { get; set; }
@@ -32,7 +35,7 @@ namespace WeatherForecast.ViewModels
         {
             try
             {
-                City = await Service.CreateCityObject("London");
+                City = await Service.CreateCityObject("Budapest");
                 Days = City.Days;
                 return true;
             }

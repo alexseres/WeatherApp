@@ -15,11 +15,17 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <StackPanel>
-                <TextBlock Text="{Binding Path=City.Name}"/> 
-            </StackPanel>
+
+
+
+            <Canvas Margin="400,0,5,10" >
+                <TextBlock Height="133" Width="198" Canvas.Left="198" Canvas.Top="10"/>
+                <TextBlock Canvas.Left="10" Canvas.Top="10" Text="TextBlock" TextWrapping="Wrap" Height="66" Width="114"/>
+                <TextBlock Canvas.Top="76" Text="TextBlock" TextWrapping="Wrap" Height="52" Width="133"/>
+                <TextBlock Canvas.Top="133" Text="TextBlock" TextWrapping="Wrap" Height="43" Width="124"/>
+            </Canvas>
         </Grid>
-        
+
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -31,8 +37,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
-            <ItemsControl ItemsSource="{Binding Path=Dicti}" Grid.Column="1">
+
+            <ItemsControl ItemsSource="{Binding Path=Days}" Grid.Column="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"  Margin="0,9,0,0"/>
@@ -42,34 +48,22 @@
                     <DataTemplate>
                         <StackPanel Margin="10, 10, 10 80" VerticalAlignment="Bottom">
                             <Border Name="br" Margin="3,10,3,10"  CornerRadius="5" 
-                                Background="SlateGray" Width="20" BorderBrush="Aqua" BorderThickness="3" Height="{Binding Value}">
-                                <Border.Triggers>
-                                    <EventTrigger RoutedEvent="Border.Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation From="0"  
-                                                           Storyboard.TargetName="br" Storyboard.TargetProperty="(FrameworkElement.Height)" 
-                                                           Duration="0:0:03.0">
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </Border.Triggers>
+                                Background="SlateGray" Width="20" BorderBrush="Aqua" BorderThickness="3" Height="{Binding Temperature}">
+
                             </Border>
                             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Width="30"
-                                       FontFamily="Latha" Text="{Binding Path=Value}">
+                                       FontFamily="Latha" Text="{Binding Path=Temperature}">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="-30"/>
 
                                 </TextBlock.RenderTransform>
                             </TextBlock>
                             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Latha"
-                                       Text="{Binding Path=Key}">
+                                       Text="{Binding Path=Name}">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="-20"/>
                                 </TextBlock.RenderTransform>
                             </TextBlock>
-
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
