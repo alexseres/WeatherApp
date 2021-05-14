@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherForecast.Converters;
@@ -42,21 +43,6 @@ namespace WeatherForecast.Services
         }
 
 
-        public List<Day> CreateDaysList(ForecastDaysDTO daysDTO)
-        {
-            List<Day> days = new List<Day>();
-            foreach (var dayDTO in daysDTO.Days)
-            {
-                Day day = new Day()
-                {
-                    ExactDay = DayConverter.EpochToDate(dayDTO.ExactDay),
-                    Temperature = dayDTO.Temperature.Temperature
-                };
-                days.Add(day);
-            }
-            return days;
-        }
-
         public async Task<City> CreateCityObject(string cityName)
         {
             (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
@@ -77,6 +63,19 @@ namespace WeatherForecast.Services
                 throw new Exception();
             }
         }
-
+        public ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO)
+        {
+            ObservableCollection<Day> days = new ObservableCollection<Day>();
+            foreach (var dayDTO in daysDTO.Days)
+            {
+                Day day = new Day()
+                {
+                    ExactDay = DayConverter.EpochToDate(dayDTO.ExactDay),
+                    Temperature = dayDTO.Temperature.Temperature
+                };
+                days.Add(day);
+            }
+            return days;
+        }
     }
 }

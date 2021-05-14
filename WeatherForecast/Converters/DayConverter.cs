@@ -8,9 +8,9 @@ namespace WeatherForecast.Converters
     {
         public static DateTime EpochToDate(long number)
         {
-            DateTimeOffset offset = DateTimeOffset.FromUnixTimeSeconds(number * 1000);
-            DateTime convertedValue = offset.DateTime;
-            return convertedValue;
+                DateTimeOffset offset = DateTimeOffset.FromUnixTimeSeconds(number);
+                DateTime convertedValue = offset.DateTime;
+                return convertedValue;
         }
     }
 }

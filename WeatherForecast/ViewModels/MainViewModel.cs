@@ -14,6 +14,8 @@ namespace WeatherForecast.ViewModels
         private City _city;
         public City City { get { return _city; } set { SetProperty(ref _city, value); } }
 
+        private ObservableCollection<Day> _days;
+        public ObservableCollection<Day> Days { get { return _days; } set { SetProperty(ref _days, value); } }
 
         public IHttpManager ClientManager { get; set; }
         public CityService Service { get; set; }
@@ -26,17 +28,12 @@ namespace WeatherForecast.ViewModels
             TryGettingMainProperties();
         }
 
-        public void ConvertTemperatures()
-        {
-            City.Temperature.Temperature = KelvinConverter.ConvertKelvinToCelsius(City.Temperature.Temperature);
-        }
-
         public async Task<bool> TryGettingMainProperties()
         {
             try
             {
-                City = await Service.GetCity("London");
-                ForecastDays = await Service.GetNextDays(City.Coordinates.Latitude, City.Coordinates.Latitude);
+                City = await Service.CreateCityObject("London");
+                Days = City.Days;
                 return true;
             }
             catch (Exception ex)
@@ -45,8 +42,5 @@ namespace WeatherForecast.ViewModels
                 return false;
             }
         }
-
-        
-
     }
 }

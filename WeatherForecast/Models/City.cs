@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace WeatherForecast.Models
@@ -10,7 +11,7 @@ namespace WeatherForecast.Models
         public string Name { get; set; }
         public int ID { get; set; }
         public decimal Temperature { get; set; }
-        public List<Day> Days { get; set; }
+        public ObservableCollection<Day> Days { get; set; }
 
         public string Weather { get; set; }
     }
