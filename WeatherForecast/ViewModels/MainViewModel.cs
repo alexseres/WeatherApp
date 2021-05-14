@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherForecast.Converters;
@@ -13,6 +14,8 @@ namespace WeatherForecast.ViewModels
     {
         #region Properties
 
+        private string _exceptionMessage;
+        public string ExceptionMessage { get { return _exceptionMessage; } set { SetProperty(ref _exceptionMessage, value); } }
         private int _doubleTemperatureForDisplay;
         public int DoubleTemperature { get { return _doubleTemperatureForDisplay; } set { SetProperty(ref _doubleTemperatureForDisplay, value); } }
 
@@ -42,16 +45,26 @@ namespace WeatherForecast.ViewModels
           
         }
 
-
         public async void SearchRequest(object obj)
         {
             if(SearchInput != null)
             {
                 try
                 {
+                    if (ExceptionMessage != null) ExceptionMessage = "";
                     City = await Service.CreateCityObject(SearchInput);
                     Days = City.Days;
                 }
+                catch(HttpRequestException ex)
+                {
+                    ExceptionMessage = "There is no such a City";
+                    if(City !=null && Days != null)
+                    {
+                        City = null;
+                        Days = null;
+                    }
+                }
+
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);

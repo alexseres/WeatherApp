@@ -22,10 +22,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBox Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0"/>
             <Button Content="Button" HorizontalAlignment="Left" Margin="200,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="43" Width="127" Command="{Binding SearchCommand}"/>
-
+            <TextBlock Text="{Binding Path=ExceptionMessage}" Foreground="Red" Grid.Row="2"> </TextBlock>
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="{Binding Path=City.Name}" />

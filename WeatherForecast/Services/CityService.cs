@@ -35,7 +35,7 @@ namespace WeatherForecast.Services
                 ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
                 return (cityDTO, daysDTO);
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException ex) 
             {
                 throw new ArgumentException();
                 Console.WriteLine(ex);
@@ -62,7 +62,7 @@ namespace WeatherForecast.Services
             }
             catch(Exception ex)
             {
-                throw new Exception();
+                return new City { };
             }
         }
         public ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO)
