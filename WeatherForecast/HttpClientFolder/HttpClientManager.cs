@@ -28,7 +28,8 @@ namespace WeatherForecast.Services
             {
                 RequestUri = new Uri($"{url}?q={cityName}&appid={apiKey}")
             };
-            return await ProcessingRequestForObject<T>(request);
+            T item = await ProcessingRequestForObject<T>(request);
+            return item;
         }
 
         public async Task<T> GetNextDayWeathers<T>(float lat, float lon)
@@ -38,7 +39,8 @@ namespace WeatherForecast.Services
             {
                 RequestUri = new Uri($"{url}lat={lat}&lon={lon}&appid={apiKey}")
             };
-            return await ProcessingRequestForObject<T>(request);
+            T item = await ProcessingRequestForObject<T>(request);
+            return item; 
         }
 
         public async Task<T> ProcessingRequestForObject<T>(HttpRequestMessage request)
