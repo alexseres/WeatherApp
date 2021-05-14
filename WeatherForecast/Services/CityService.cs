@@ -39,20 +39,11 @@ namespace WeatherForecast.Services
                 throw new ArgumentException();
                 Console.WriteLine(ex);
             }
-
-            
         }
 
-        public async Task<City> CreateObject(string cityName)
+
+        public List<Day> CreateDaysList(ForecastDaysDTO daysDTO)
         {
-            (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
-            City city = new City
-            {
-                Name = cityDTO.Name,
-                ID = cityDTO.ID,
-                Temperature = KelvinConverter.ConvertKelvinToCelsius(cityDTO.Temperature.Temperature),
-                Weather = cityDTO.Weathers[0].ToString()
-            };
             List<Day> days = new List<Day>();
             foreach (var dayDTO in daysDTO.Days)
             {
@@ -63,9 +54,28 @@ namespace WeatherForecast.Services
                 };
                 days.Add(day);
             }
-            city.Days = days;
-            return city;
+            return days;
+        }
 
+        public async Task<City> CreateCityObject(string cityName)
+        {
+            (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
+            try
+            {
+                City city = new City
+                {
+                    Name = cityDTO.Name,
+                    ID = cityDTO.ID,
+                    Temperature = KelvinConverter.ConvertKelvinToCelsius(cityDTO.Temperature.Temperature),
+                    Weather = cityDTO.Weathers[0].ToString()
+                };
+                city.Days = CreateDaysList(daysDTO);
+                return city;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
     }
