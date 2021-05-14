@@ -55,6 +55,16 @@ namespace WeatherForecast.ViewModels
                     City = await Service.CreateCityObject(SearchInput);
                     Days = City.Days;
                 }
+                catch(HttpRequestException ex) when (ex.Message.Contains("host"))
+                {
+                    ExceptionMessage = "No connection";
+                    if (City != null && Days != null)
+                    {
+                        City = null;
+                        Days = null;
+                    }
+                }
+                 
                 catch(HttpRequestException ex)
                 {
                     ExceptionMessage = "There is no such a City";
