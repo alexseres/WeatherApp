@@ -28,7 +28,7 @@ namespace WeatherForecast.ViewModels
         public ObservableCollection<Day> Days { get { return _days; } set { SetProperty(ref _days, value); } }
 
         public IHttpManager ClientManager { get; set; }
-        public CityService Service { get; set; }
+        public ICityService Service { get; set; }
         #endregion
 
         #region Commands
