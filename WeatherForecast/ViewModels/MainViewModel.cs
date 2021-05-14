@@ -14,6 +14,9 @@ namespace WeatherForecast.ViewModels
         private int _doubleTemperatureForDisplay;
         public int DoubleTemperature { get { return _doubleTemperatureForDisplay; } set { SetProperty(ref _doubleTemperatureForDisplay, value); } }
 
+        private string _searchInput;
+        public string SearchInput { get { return _searchInput; } set { SetProperty(ref _searchInput, value); } }
+
         private City _city;
         public City City { get { return _city; } set { SetProperty(ref _city, value); } }
 
