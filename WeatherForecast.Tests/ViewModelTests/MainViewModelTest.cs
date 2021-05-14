@@ -49,6 +49,25 @@ namespace WeatherForecast.Tests.ViewModelTests
         }
 
         [Fact]
+        public async void SearchRequest_ShouldThrowNullArgumentException_BecauseOfNulObjectReceived()
+        {
+            //Arrange
+            viewModel.Service = mockCityService.Object;
+            viewModel.SearchInput = "London";
+            string cityName = viewModel.SearchInput;
+            string expected = "Some Property is missing, try with another city";
+
+            //Act
+            mockCityService.Setup(c => c.CreateCityObject(cityName)).ThrowsAsync(new ArgumentNullException());
+            viewModel.SearchRequest(new object());
+
+            //Assert
+            Assert.Null(viewModel.City);
+            Assert.Null(viewModel.Days);
+            Assert.Equal(expected, viewModel.ExceptionMessage);
+        }
+
+        [Fact]
         public async void SearchRequest_ShouldThrowHttpRequestMessageException_BecauseOfWrongInput()
         {
             //Arrange
