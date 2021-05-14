@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using WeatherForecast.Services;
 using WeatherForecast.ViewModels;
 using Xunit;
 
@@ -9,6 +11,7 @@ namespace WeatherForecast.Tests.ViewModelTests
     public class MainViewModelTest
     {
         public MainViewModel viewModel;
+        public Mock<ICityService> mockCityService = new Mock<ICityService>();
         public MainViewModelTest()
         {
             viewModel = new MainViewModel();
@@ -22,5 +25,7 @@ namespace WeatherForecast.Tests.ViewModelTests
             Assert.NotNull(viewModel.Service);
             Assert.NotNull(viewModel.SearchCommand);
         }
+
+
     }
 }

@@ -8,7 +8,7 @@ using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
 {
-    public class CityService
+    public class CityService : ICityService
     {
         public IHttpManager ClientManager { get; set; }
         public CityService(IHttpManager manager)
