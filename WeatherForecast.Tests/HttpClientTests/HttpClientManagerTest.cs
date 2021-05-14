@@ -34,8 +34,6 @@ namespace WeatherForecast.Tests.HttpClientTests
             //Assert
             Assert.NotNull(actualItem);
             Assert.Equal(expectedName, actualItem.Name);
-            
-
         }
 
             [Fact]
