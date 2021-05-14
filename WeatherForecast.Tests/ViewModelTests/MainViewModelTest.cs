@@ -30,6 +30,25 @@ namespace WeatherForecast.Tests.ViewModelTests
         }
 
         [Fact]
+        public async void SearchRequest_ShouldThrowHttpRequestMessageException_BecauseOfNoInternetConnectiont()
+        {
+            //Arrange
+            viewModel.Service = mockCityService.Object;
+            viewModel.SearchInput = "London";
+            string cityName = viewModel.SearchInput;
+            string expected = "No connection made";
+
+            //Act
+            mockCityService.Setup(c => c.CreateCityObject(cityName)).ThrowsAsync(new HttpRequestException("host"));
+            viewModel.SearchRequest(new object());
+
+            //Assert
+            Assert.Null(viewModel.City);
+            Assert.Null(viewModel.Days);
+            Assert.Equal(expected, viewModel.ExceptionMessage);
+        }
+
+        [Fact]
         public async void SearchRequest_ShouldThrowHttpRequestMessageException_BecauseOfWrongInput()
         {
             //Arrange
