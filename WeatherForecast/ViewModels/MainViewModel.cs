@@ -13,7 +13,6 @@ namespace WeatherForecast.ViewModels
     public class MainViewModel : BaseViewModel
     {
         #region Properties
-
         private string _exceptionMessage;
         public string ExceptionMessage { get { return _exceptionMessage; } set { SetProperty(ref _exceptionMessage, value); } }
         private int _doubleTemperatureForDisplay;
@@ -39,10 +38,10 @@ namespace WeatherForecast.ViewModels
 
         public MainViewModel()
         {
+            //initialize command and instantiate quientessential properties 
             SearchCommand = new RelayCommand(SearchRequest, true);
             ClientManager = new HttpClientManager();
             Service = new CityService(ClientManager);
-          
         }
 
         public async void SearchRequest(object obj)
@@ -51,9 +50,19 @@ namespace WeatherForecast.ViewModels
             {
                 try
                 {
+                    // populate City and Days properties 
                     if (ExceptionMessage != null) ExceptionMessage = "";
                     City = await Service.CreateCityObject(SearchInput);
                     Days = City.Days;
+                }
+                catch(HttpRequestException ex) when (ex.Message.Contains("401"))
+                {
+                    ExceptionMessage = "APIkey is wrong or expired";
+                    if (City != null && Days != null)
+                    {
+                        City = null;
+                        Days = null;
+                    }
                 }
                 catch(HttpRequestException ex) when (ex.Message.Contains("host"))
                 {
@@ -64,9 +73,9 @@ namespace WeatherForecast.ViewModels
                         Days = null;
                     }
                 }
-                 
-                catch(HttpRequestException ex)
+                catch(HttpRequestException)
                 {
+                    //when the api cannot handle the request because of nonexistent input
                     ExceptionMessage = "There is no such a City";
                     if(City !=null && Days != null)
                     {
@@ -74,10 +83,25 @@ namespace WeatherForecast.ViewModels
                         Days = null;
                     }
                 }
-
-                catch (Exception ex)
+                catch(ArgumentNullException)
                 {
-                    Console.WriteLine(ex);
+                    //if some property is missing eg: one of the temperature of the day is null
+                    ExceptionMessage = "Some Property is missing, try with another city";
+                    if (City != null && Days != null)
+                    {
+                        City = null;
+                        Days = null;
+                    }
+                }
+                catch (Exception)
+                {
+                    //if any other exception happens 
+                    ExceptionMessage = "Unexpected error happened, try with another city or leave the application";
+                    if (City != null && Days != null)
+                    {
+                        City = null;
+                        Days = null;
+                    }
                 }
 
             }

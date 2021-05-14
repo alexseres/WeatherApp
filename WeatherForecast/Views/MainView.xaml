@@ -68,7 +68,7 @@
                                 </TextBlock.RenderTransform>
                             </TextBlock>
                             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Latha"
-                                       Text="{Binding Path=Name}">
+                                       Text="{Binding Path=DayOfTheWeek}">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="-20"/>
                                 </TextBlock.RenderTransform>

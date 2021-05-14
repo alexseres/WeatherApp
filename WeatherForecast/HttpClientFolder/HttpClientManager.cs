@@ -9,6 +9,7 @@ using WeatherForecast.Models;
 
 namespace WeatherForecast.Services
 {
+    //this client is a communicator with the webapi, request creationd and sending happen here
     public class HttpClientManager :IHttpManager
     {
         private string apiKey = Configs.ApiKey;
@@ -48,7 +49,6 @@ namespace WeatherForecast.Services
                 response.EnsureSuccessStatusCode();
                 string body = await response.Content.ReadAsStringAsync();
                 T item = JsonConverters<T>.JsonConverter(body);
-                object item2 = JsonConverters<object>.JsonConverter(body);
                 return item;
             }
         }

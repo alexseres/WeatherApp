@@ -29,46 +29,31 @@ namespace WeatherForecast.Services
 
         public async Task<(CityDTO,ForecastDaysDTO)> GetObjects(string cityName)
         {
-            try
-            {
-                CityDTO cityDTO = await GetCity(cityName);
-                ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
-                return (cityDTO, daysDTO);
-            }
-            catch (ArgumentNullException ex) 
-            {
-                throw new ArgumentException();
-                Console.WriteLine(ex);
-            }
+            CityDTO cityDTO = await GetCity(cityName);
+            ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
+            return (cityDTO, daysDTO);
         }
 
         public async Task<City> CreateCityObject(string cityName)
         {
             (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
-            try
+            City city = new City
             {
-                 City city = new City
-                {
-                    Name = cityDTO.Name,
-                    ID = cityDTO.ID,
-                    Temperature = KelvinConverter.ConvertKelvinToCelsius(cityDTO.Temperature.Temperature),
-                    Weather = cityDTO.Weathers[0].CurrentWeather,
-                    Date = DayConverter.EpochToDate(cityDTO.Date),
+                Name = cityDTO.Name,
+                ID = cityDTO.ID,
+                Temperature = KelvinConverter.ConvertKelvinToCelsius(cityDTO.Temperature.Temperature),
+                Weather = cityDTO.Weathers[0].CurrentWeather,
+                Date = DayConverter.EpochToDate(cityDTO.Date),
                     
-                };
-                city.DayOfTheWeek = city.Date.DayOfWeek.ToString();
-                city.Days = CreateDaysList(daysDTO);
-                return city;
-            }
-            catch(Exception ex)
-            {
-                return new City { };
-            }
+            };
+            city.DayOfTheWeek = city.Date.DayOfWeek.ToString();
+            city.Days = CreateDaysList(daysDTO);
+            return city;
         }
+
         public ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO)
         {
             //we need firstdaychecker in order to get rid of the actual day, because we got that in the City object
-
             ObservableCollection<Day> days = new ObservableCollection<Day>();
             int firstDayChecker = 0;
             foreach (var dayDTO in daysDTO.Days)
