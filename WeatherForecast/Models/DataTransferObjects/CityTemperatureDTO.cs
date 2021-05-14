@@ -9,5 +9,8 @@ namespace WeatherForecast.Models
     {
         [JsonProperty("temp")]
         public decimal Temperature { get; set; }
+
+        [JsonProperty("weather")]
+        public string Weather { get; set; }
     }
 }

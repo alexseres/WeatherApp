@@ -13,5 +13,8 @@ namespace WeatherForecast.Models
 
         [JsonProperty("temp")]
         public ForecastDaysTemperatureDTO Temperature { get; set; }
+
+        [JsonProperty("weather")]
+        public List<WeatherDescription> Description { get; set; }
     }
 }
