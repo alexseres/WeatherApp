@@ -57,7 +57,7 @@ namespace WeatherForecast.ViewModels
                 }
                 catch(HttpRequestException ex) when (ex.Message.Contains("host"))
                 {
-                    ExceptionMessage = "No connection";
+                    ExceptionMessage = "No connection made";
                     if (City != null && Days != null)
                     {
                         City = null;
