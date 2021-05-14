@@ -14,5 +14,8 @@ namespace WeatherForecast.Models
         public ObservableCollection<Day> Days { get; set; }
 
         public string Weather { get; set; }
+
+        public DateTime Date { get; set; }
+        public string DayOfTheWeek { get; set; }
     }
 }

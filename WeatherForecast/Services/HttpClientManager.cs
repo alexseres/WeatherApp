@@ -52,7 +52,5 @@ namespace WeatherForecast.Services
                 return item;
             }
         }
-
     }
-
 }

@@ -53,8 +53,11 @@ namespace WeatherForecast.Services
                     Name = cityDTO.Name,
                     ID = cityDTO.ID,
                     Temperature = KelvinConverter.ConvertKelvinToCelsius(cityDTO.Temperature.Temperature),
-                    Weather = cityDTO.Weathers[0].ToString()
+                    Weather = cityDTO.Weathers[0].ToString(),
+                    Date = DayConverter.EpochToDate(cityDTO.Date),
+                    
                 };
+                city.DayOfTheWeek = city.Date.DayOfWeek.ToString();
                 city.Days = CreateDaysList(daysDTO);
                 return city;
             }
@@ -65,14 +68,25 @@ namespace WeatherForecast.Services
         }
         public ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO)
         {
+            //we need first day checker in order to get rid of the actual day, because we got that in the City object
+
+
             ObservableCollection<Day> days = new ObservableCollection<Day>();
+            int firstDayChecker = 0;
             foreach (var dayDTO in daysDTO.Days)
             {
+                if(firstDayChecker == 0)
+                {
+                    firstDayChecker++;
+                    continue;
+                }
                 Day day = new Day()
                 {
                     ExactDay = DayConverter.EpochToDate(dayDTO.ExactDay),
-                    Temperature = dayDTO.Temperature.Temperature
+                    Temperature = dayDTO.Temperature.Temperature,
+                    WeatherDescription = dayDTO.Description[0].Description
                 };
+                day.DayOfTheWeek = day.ExactDay.DayOfWeek.ToString();
                 days.Add(day);
             }
             return days;

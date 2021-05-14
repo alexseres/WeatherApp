@@ -9,5 +9,9 @@ namespace WeatherForecast.Models
         public DateTime ExactDay { get; set; }
 
         public decimal Temperature { get; set; }
+
+        public string WeatherDescription { get; set; }
+
+        public string DayOfTheWeek { get; set; }
     }
 }

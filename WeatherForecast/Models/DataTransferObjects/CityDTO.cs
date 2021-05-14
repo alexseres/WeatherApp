@@ -18,6 +18,9 @@ namespace WeatherForecast.Models
         [JsonProperty("coord")]
         public CoordinatesDTO Coordinates { get; set; }
 
+        [JsonProperty("dt")]
+        public int Date { get; set; }
+
 
     }
 }
