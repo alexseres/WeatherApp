@@ -1,7 +1,9 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using WeatherForecast.Models;
 using WeatherForecast.Services;
 using WeatherForecast.ViewModels;
@@ -28,6 +30,25 @@ namespace WeatherForecast.Tests.ViewModelTests
         }
 
         [Fact]
+        public async void SearchRequest_ShouldThrowHttpRequestMessageException_BecauseOfWrongInput()
+        {
+            //Arrange
+            viewModel.Service = mockCityService.Object;
+            viewModel.SearchInput = "Lodnon";
+            string cityName = viewModel.SearchInput;
+            string expected = "APIkey is wrong or expired";
+
+            //Act
+            mockCityService.Setup(c => c.CreateCityObject(cityName)).ThrowsAsync(new HttpRequestException("401"));
+            viewModel.SearchRequest(new object());
+
+            //Assert
+            Assert.Null(viewModel.City);
+            Assert.Null(viewModel.Days);
+            Assert.Equal(expected, viewModel.ExceptionMessage);
+        }
+
+        [Fact]
         public async void SearchRequest_ShouldinitializeCityAndDaysProperty_WithoutException()
         {
             //Arrange
@@ -47,7 +68,7 @@ namespace WeatherForecast.Tests.ViewModelTests
 
             //Assert
             Assert.NotNull(viewModel.City);
-            Assert.NotNull(viewModel.City);
+            Assert.NotNull(viewModel.Days);
             Assert.Equal(cityName, viewModel.City.Name);
             Assert.Equal(expectedCity, viewModel.City);
             mockCityService.Verify(c => c.CreateCityObject(cityName), Times.Once);
