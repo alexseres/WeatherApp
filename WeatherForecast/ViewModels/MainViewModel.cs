@@ -11,6 +11,8 @@ namespace WeatherForecast.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+        #region Properties
+
         private int _doubleTemperatureForDisplay;
         public int DoubleTemperature { get { return _doubleTemperatureForDisplay; } set { SetProperty(ref _doubleTemperatureForDisplay, value); } }
 
@@ -25,28 +27,38 @@ namespace WeatherForecast.ViewModels
 
         public IHttpManager ClientManager { get; set; }
         public CityService Service { get; set; }
+        #endregion
 
-        public Dictionary<string,decimal> Dicti { get; set; }
+        #region Commands
+        private RelayCommand _searchCommand;
+        public RelayCommand SearchCommand { get { return _searchCommand;  } set { SetProperty(ref _searchCommand, value); } }
+        #endregion
+
         public MainViewModel()
         {
+            SearchCommand = new RelayCommand(SearchRequest, true);
             ClientManager = new HttpClientManager();
             Service = new CityService(ClientManager);
-            TryGettingMainProperties();
+          
         }
 
-        public async Task<bool> TryGettingMainProperties()
+
+        public async void SearchRequest(object obj)
         {
-            try
+            if(SearchInput != null)
             {
-                City = await Service.CreateCityObject("Budapest");
-                Days = City.Days;
-                return true;
+                try
+                {
+                    City = await Service.CreateCityObject(SearchInput);
+                    Days = City.Days;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
+
         }
     }
 }

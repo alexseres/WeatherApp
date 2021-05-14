@@ -25,6 +25,8 @@
             </Grid.RowDefinitions>
             <TextBox Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0"/>
 
+            
+            
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="{Binding Path=City.Name}" />
