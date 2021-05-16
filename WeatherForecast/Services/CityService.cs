@@ -12,11 +12,20 @@ namespace WeatherForecast.Services
     {
         public IHttpManager ClientManager { get; set; }
 
+
         //this variable just multiplies the temperature because that value is adjusted by the height of an ui element
         private const int temperatureMultiplier = 4;
         public CityService(IHttpManager manager)
         {
             ClientManager = manager;
+        }
+
+        public async Task<City> CreateAndGetObjects(string searchInput)
+        {
+            CityDTO cityDTO= await GetCity(searchInput);
+            ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
+            City city = await CreateCityObject(cityDTO, daysDTO);
+            return city;
         }
 
         public async Task<CityDTO> GetCity(string cityName)
@@ -30,16 +39,9 @@ namespace WeatherForecast.Services
         }
 
 
-        public async Task<(CityDTO,ForecastDaysDTO)> GetObjects(string cityName)
+        public async Task<City> CreateCityObject(CityDTO cityDTO,ForecastDaysDTO daysDTO)
         {
-            CityDTO cityDTO = await GetCity(cityName);
-            ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
-            return (cityDTO, daysDTO);
-        }
 
-        public async Task<City> CreateCityObject(string cityName)
-        {
-            (CityDTO cityDTO, ForecastDaysDTO daysDTO) =await  GetObjects(cityName);
             City city = new City
             {
                 Name = cityDTO.Name,

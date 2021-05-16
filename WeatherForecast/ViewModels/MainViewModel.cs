@@ -52,7 +52,7 @@ namespace WeatherForecast.ViewModels
                 {
                     // populate City and Days properties 
                     if (ExceptionMessage != null) ExceptionMessage = "";
-                    City = await Service.CreateCityObject(SearchInput);
+                    City = await Service.CreateAndGetObjects(SearchInput);
                     Days = City.Days;
                 }
                 catch(HttpRequestException ex) when (ex.Message.Contains("401"))

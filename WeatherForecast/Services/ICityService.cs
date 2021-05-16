@@ -9,10 +9,10 @@ namespace WeatherForecast.Services
 {
     public interface ICityService
     {
+        Task<City> CreateAndGetObjects(string searchInput);
         Task<CityDTO> GetCity(string cityName);
         Task<ForecastDaysDTO> GetNextDays(float lat, float lon);
-        Task<(CityDTO, ForecastDaysDTO)> GetObjects(string cityName);
-        Task<City> CreateCityObject(string cityName);
+        Task<City> CreateCityObject(CityDTO cityDTO, ForecastDaysDTO daysDTO);
         ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO);
     }
 }
