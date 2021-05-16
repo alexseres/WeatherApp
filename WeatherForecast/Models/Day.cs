@@ -10,6 +10,7 @@ namespace WeatherForecast.Models
 
         public decimal Temperature { get; set; }
 
+
         public string WeatherDescription { get; set; }
 
         public string DayOfTheWeek { get; set; }

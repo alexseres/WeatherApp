@@ -10,6 +10,7 @@
       WindowWidth="850"
       Title="MainView"
       FontFamily="Courier">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -28,11 +29,13 @@
             </Grid.RowDefinitions>
             <TextBox Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"
                      Grid.Column="0"
+                     Width="143"
+                     Height="25"
                      Grid.Row="3"
                      Margin="38,72,218,-57"
                      BorderThickness="3"
                      BorderBrush="Yellow"
-                     Foreground="DarkGray"
+                     Foreground="DarkSlateGray"
                      Background="LightSkyBlue">
                 <TextBox.Resources>
                     <Style TargetType="Border">
@@ -49,7 +52,7 @@
                     BorderBrush="Yellow"
                     BorderThickness="3"
                     Background="LightSkyBlue"
-                    Foreground="Gray"
+                    Foreground="DarkSlateGray"
                     FontFamily="Courier">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -59,14 +62,14 @@
             </Button>
             <TextBlock Text="{Binding Path=ExceptionMessage}"
                        Foreground="Red"
-                       Grid.Row="3" Margin="38,85,98,-87"
+                       Grid.Row="3" Margin="38,102,98,-104"
                        FontFamily="Courier"></TextBlock>
 
             <StackPanel Grid.Column="1"
                         Margin="40,83,92,-154"
                         Grid.Row="3"
                         Width="200"
-                        Visibility="Visible">
+                        Visibility="{Binding Path=VisibilityOfCard}">
                 <Border BorderThickness="5"
                         BorderBrush="Yellow"
                         Background="SkyBlue">
@@ -89,14 +92,14 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="Name" Grid.Row="0" Foreground="DarkSlateGray"/>
-                                <TextBlock Text="Date" Grid.Row="1" Foreground="DarkSlateGray"/>
-                                <TextBlock Text="Day" Grid.Row="2" Foreground="DarkSlateGray"/>
+                                <TextBlock Text="{Binding Path=City.Name}" Grid.Row="0" Foreground="DarkSlateGray"/>
+                                <TextBlock Text="{Binding Path=City.Date}" Grid.Row="1" Foreground="DarkSlateGray"/>
+                                <TextBlock Text="{Binding Path=City.DayOfTheWeek}" Grid.Row="2" Foreground="DarkSlateGray"/>
                             </Grid>
                         </StackPanel>
                         <StackPanel Grid.Column="1"
                                     VerticalAlignment="Bottom">
-                            <TextBlock Text="Cels" FontSize="40" Foreground="DarkSlateGray"/>
+                            <TextBlock Text="{Binding Path=City.Temperature}" FontSize="40" Foreground="DarkSlateGray"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -104,36 +107,41 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
 
-            <ItemsControl ItemsSource="{Binding Path=Days}" Grid.Column="1">
+
+            <ItemsControl ItemsSource="{Binding Path=Days}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"  Margin="0,9,0,0"/>
+                        <StackPanel Orientation="Horizontal" Width="600"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="10, 10, 10 80" VerticalAlignment="Bottom">
-                            <Border Name="br" Margin="3,10,3,10"  CornerRadius="5" 
-                                Background="SlateGray" Width="20" BorderBrush="Aqua" BorderThickness="3" Height="{Binding Temperature}">
+                        <StackPanel Margin="10, 150, 10, 0" VerticalAlignment="Bottom" >
+
+                            <TextBlock Text="{Binding Path=Temperature}"
+                                       HorizontalAlignment="Center"
+                                       
+                                       />
+                            <Border Name="br"
+                                    Margin="3,0,3,25"
+                                    CornerRadius="2" 
+                                    Background="DarkBlue"
+                                    Width="40"
+                                    Height="{Binding Temperature}">
                             </Border>
-                            <TextBlock HorizontalAlignment="Center" FontWeight="Bold" Width="30"
-                                       FontFamily="Latha" Text="{Binding Path=Temperature}">
+
+                            <!--<TextBlock VerticalAlignment="Top"
+                                       HorizontalAlignment="Center"
+                                       Width="10">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="-30"/>
 
                                 </TextBlock.RenderTransform>
-                            </TextBlock>
-                            <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontFamily="Latha"
+                            </TextBlock>-->
+                            <TextBlock HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Bottom"
                                        Text="{Binding Path=DayOfTheWeek}">
                                 <TextBlock.RenderTransform>
                                     <TranslateTransform Y="-20"/>
