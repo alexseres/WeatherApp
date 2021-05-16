@@ -1,7 +1,9 @@
 ﻿using Moq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using WeatherForecast.Models;
 using WeatherForecast.Services;
 using Xunit;
@@ -61,6 +63,59 @@ namespace WeatherForecast.Tests.ServiceTests
             Assert.Equal(expectedCity.ID, acutalCity.ID);
         }
 
+        [Fact]
+        public async Task CreateDaysList_ShouldCreateListWithDays()
+        {
+            //Arrange
+            var cityName = "London";
+
+            ForecastDaysDTO daysDTO = new ForecastDaysDTO
+            {
+                Days = new List<DayDTO>
+                {
+                    new DayDTO
+                    {
+                        Description = new List<WeatherDescription>
+                        {
+                            new WeatherDescription
+                            {
+                                Description = "Sunny"
+                            }
+                        },
+                        ExactDay = 12234234,
+                        Temperature = new ForecastDaysTemperatureDTO
+                        {
+                            Temperature = 24
+                        }
+                    },
+                    new DayDTO
+                    {
+                        Description = new List<WeatherDescription>
+                        {
+                            new WeatherDescription
+                            {
+                                Description = "Cloudy"
+                            }
+                        },
+                        ExactDay = 12234244,
+                        Temperature = new ForecastDaysTemperatureDTO
+                        {
+                            Temperature = 25
+                        }
+                    }
+
+                }
+
+            };
+            var expectedCount = 1;
+
+            //Act
+            ObservableCollection<Day> actualDays = service.CreateDaysList(daysDTO);
+
+            //Assert
+            Assert.NotNull(actualDays);
+            Assert.Equal(expectedCount, actualDays.Count);
+        }
         
     }
 }
