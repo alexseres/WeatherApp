@@ -9,7 +9,9 @@
       WindowHeight="560"
       WindowWidth="850"
       Title="MainView"
-      FontFamily="Courier">
+      FontFamily="Courier"
+      Background="DimGray">
+    
 
     <Grid>
         <Grid.RowDefinitions>
@@ -34,7 +36,7 @@
                      Grid.Row="3"
                      Margin="38,72,218,-57"
                      BorderThickness="3"
-                     BorderBrush="Yellow"
+                     BorderBrush="Gold"
                      Foreground="DarkSlateGray"
                      Background="LightSkyBlue">
                 <TextBox.Resources>
@@ -49,7 +51,7 @@
                     Margin="187,72,0,-57"
                     Width="56"
                     Command="{Binding SearchCommand}"
-                    BorderBrush="Yellow"
+                    BorderBrush="Gold"
                     BorderThickness="3"
                     Background="LightSkyBlue"
                     Foreground="DarkSlateGray"
@@ -71,7 +73,7 @@
                         Width="200"
                         Visibility="{Binding Path=VisibilityOfCard}">
                 <Border BorderThickness="5"
-                        BorderBrush="Yellow"
+                        BorderBrush="Gold"
                         Background="SkyBlue">
                     <Border.Resources>
                         <Style TargetType="Border">
@@ -104,11 +106,19 @@
                     </Grid>
                 </Border>
             </StackPanel>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="38,0,0,0"
+                       Grid.Row="3"
+                       Text="wApp"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       Height="40"
+                       Width="144"
+                       FontSize="30"
+                       Foreground="Gold"/>
         </Grid>
 
         <Grid Grid.Row="1">
-
-
             <ItemsControl ItemsSource="{Binding Path=Days}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -130,15 +140,6 @@
                                     Width="40"
                                     Height="{Binding TemperatureDisplayValue}">
                             </Border>
-
-                            <!--<TextBlock VerticalAlignment="Top"
-                                       HorizontalAlignment="Center"
-                                       Width="10">
-                                <TextBlock.RenderTransform>
-                                    <TranslateTransform Y="-30"/>
-
-                                </TextBlock.RenderTransform>
-                            </TextBlock>-->
                             <TextBlock HorizontalAlignment="Center"
                                        FontWeight="Bold"
                                        VerticalAlignment="Bottom"
