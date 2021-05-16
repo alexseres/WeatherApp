@@ -24,7 +24,8 @@ namespace WeatherForecast.Services
         {
             CityDTO cityDTO= await GetCity(searchInput);
             ForecastDaysDTO daysDTO = await GetNextDays(cityDTO.Coordinates.Latitude, cityDTO.Coordinates.Longitude);
-            City city = await CreateCityObject(cityDTO, daysDTO);
+            City city = await CreateCityObject(cityDTO);
+            city.Days = CreateDaysList(daysDTO);
             return city;
         }
 
@@ -39,7 +40,7 @@ namespace WeatherForecast.Services
         }
 
 
-        public async Task<City> CreateCityObject(CityDTO cityDTO,ForecastDaysDTO daysDTO)
+        public async Task<City> CreateCityObject(CityDTO cityDTO)
         {
 
             City city = new City
@@ -52,7 +53,6 @@ namespace WeatherForecast.Services
                     
             };
             city.DayOfTheWeek = city.Date.DayOfWeek.ToString();
-            city.Days = CreateDaysList(daysDTO);
             return city;
         }
 

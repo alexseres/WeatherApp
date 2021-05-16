@@ -39,7 +39,7 @@ namespace WeatherForecast.Tests.ViewModelTests
             string expected = "No connection made";
 
             //Act
-            mockCityService.Setup(c => c.CreateCityObject(cityName)).ThrowsAsync(new HttpRequestException("host"));
+            mockCityService.Setup(c => c.CreateAndGetObjects(cityName)).ThrowsAsync(new HttpRequestException("host"));
             viewModel.SearchRequest(new object());
 
             //Assert
@@ -58,7 +58,7 @@ namespace WeatherForecast.Tests.ViewModelTests
             string expected = "Some Property is missing, try with another city";
 
             //Act
-            mockCityService.Setup(c => c.CreateCityObject(cityName)).ThrowsAsync(new ArgumentNullException());
+            mockCityService.Setup(c => c.CreateAndGetObjects(cityName)).ThrowsAsync(new ArgumentNullException());
             viewModel.SearchRequest(new object());
 
             //Assert
@@ -77,7 +77,7 @@ namespace WeatherForecast.Tests.ViewModelTests
             string expected = "APIkey is wrong or expired";
 
             //Act
-            mockCityService.Setup(c => c.CreateCityObject(cityName)).ThrowsAsync(new HttpRequestException("401"));
+            mockCityService.Setup(c => c.CreateAndGetObjects(cityName)).ThrowsAsync(new HttpRequestException("401"));
             viewModel.SearchRequest(new object());
 
             //Assert
@@ -101,7 +101,7 @@ namespace WeatherForecast.Tests.ViewModelTests
             };
 
             //Act
-            mockCityService.Setup(c => c.CreateCityObject(cityName)).ReturnsAsync(expectedCity);
+            mockCityService.Setup(c => c.CreateAndGetObjects(cityName)).ReturnsAsync(expectedCity);
             viewModel.SearchRequest(new object());
 
             //Assert
@@ -109,7 +109,7 @@ namespace WeatherForecast.Tests.ViewModelTests
             Assert.NotNull(viewModel.Days);
             Assert.Equal(cityName, viewModel.City.Name);
             Assert.Equal(expectedCity, viewModel.City);
-            mockCityService.Verify(c => c.CreateCityObject(cityName), Times.Once);
+            mockCityService.Verify(c => c.CreateAndGetObjects(cityName), Times.Once);
 
         }
 

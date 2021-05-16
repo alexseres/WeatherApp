@@ -12,7 +12,7 @@ namespace WeatherForecast.Services
         Task<City> CreateAndGetObjects(string searchInput);
         Task<CityDTO> GetCity(string cityName);
         Task<ForecastDaysDTO> GetNextDays(float lat, float lon);
-        Task<City> CreateCityObject(CityDTO cityDTO, ForecastDaysDTO daysDTO);
+        Task<City> CreateCityObject(CityDTO cityDTO);
         ObservableCollection<Day> CreateDaysList(ForecastDaysDTO daysDTO);
     }
 }

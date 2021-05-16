@@ -12,40 +12,55 @@ namespace WeatherForecast.Tests.ServiceTests
     {
         private CityService service;
         private Mock<IHttpManager> mockCLient = new Mock<IHttpManager>();
+        private CityDTO cityDTO;
 
         public CityServiceTest()
         {
             service = new CityService(mockCLient.Object);
+            cityDTO =  new CityDTO
+            {
+                Coordinates = new CoordinatesDTO
+                {
+                    Latitude = 1,
+                    Longitude = 3
+                },
+                Name = "London",
+                ID = 12345,
+                Weathers = new List<WeatherDTO>()
+                {
+                    new WeatherDTO
+                    {
+                        CurrentWeather = "Sunny"
+                    }
+                },
+                Date = 123231,
+                Temperature = new CityTemperatureDTO
+                {
+                    Temperature = (decimal)25.9
+                }
+            };
+
         }
 
         [Fact]
-        public async void GetObjects_ShouldReturnObjects()
+        public async void CreateCityObject_ShouldReturnCity()
         {
             //Arrange
-            string cityName = "London";
-            float lat = (float)51.5085;
-            float lon = (float)-0.1257;
-            CityDTO expectedCityDTO = new CityDTO
+            var expectedCity = new City
             {
-                Name = "London",
-                ID = 2643743,
-            };
-            ForecastDaysDTO forecastDaysDTO = new ForecastDaysDTO
-            {
-                City = new City()
+                ID = cityDTO.ID,
+                Name = cityDTO.Name
             };
 
             //Act
-            mockCLient.Setup(c => c.RequestForItem<CityDTO>(cityName)).ReturnsAsync(expectedCityDTO);
-            mockCLient.Setup(c => c.GetNextDayWeathers<ForecastDaysDTO>(lat, lon)).ReturnsAsync(forecastDaysDTO);
-            await service.GetCity(cityName);
-            await service.GetNextDays(lat, lon);
-            (CityDTO actualCityDTO, ForecastDaysDTO actualForecastDaysDTO ) = await service.GetObjects(cityName);
+            City acutalCity = await service.CreateCityObject(cityDTO);
 
             //Assert
-            Assert.NotNull(actualCityDTO);
-            //Assert.NotNull(actualForecastDaysDTO);
+            Assert.NotNull(acutalCity);
+            Assert.Equal(expectedCity.Name, acutalCity.Name);
+            Assert.Equal(expectedCity.ID, acutalCity.ID);
         }
 
+        
     }
 }
