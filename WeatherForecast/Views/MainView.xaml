@@ -117,7 +117,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="10, 150, 10, 0" VerticalAlignment="Bottom" >
+                        <StackPanel Margin="10, 0, 10, 0" VerticalAlignment="Bottom" >
 
                             <TextBlock Text="{Binding Path=Temperature}"
                                        HorizontalAlignment="Center"
@@ -128,7 +128,7 @@
                                     CornerRadius="2" 
                                     Background="DarkBlue"
                                     Width="40"
-                                    Height="{Binding Temperature}">
+                                    Height="{Binding TemperatureDisplayValue}">
                             </Border>
 
                             <!--<TextBlock VerticalAlignment="Top"

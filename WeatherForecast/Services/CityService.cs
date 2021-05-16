@@ -11,6 +11,9 @@ namespace WeatherForecast.Services
     public class CityService : ICityService
     {
         public IHttpManager ClientManager { get; set; }
+
+        //this variable just multiplies the temperature because that value is adjusted by the height of an ui element
+        private const int temperatureMultiplier = 4;
         public CityService(IHttpManager manager)
         {
             ClientManager = manager;
@@ -69,6 +72,7 @@ namespace WeatherForecast.Services
                     Temperature = KelvinConverter.ConvertKelvinToCelsius(dayDTO.Temperature.Temperature),
                     WeatherDescription = dayDTO.Description[0].Description
                 };
+                day.TemperatureDisplayValue = day.Temperature * temperatureMultiplier;
                 day.DayOfTheWeek = day.ExactDay.DayOfWeek.ToString();
                 days.Add(day);
             }
