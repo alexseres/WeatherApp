@@ -136,7 +136,7 @@
                             <Border Name="br"
                                     Margin="3,0,3,25"
                                     CornerRadius="2" 
-                                    Background="DarkBlue"
+                                    Background="{Binding Path=ColumnColor}"
                                     Width="40"
                                     Height="{Binding TemperatureDisplayValue}">
                             </Border>

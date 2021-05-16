@@ -73,10 +73,44 @@ namespace WeatherForecast.Services
                     WeatherDescription = dayDTO.Description[0].Description
                 };
                 day.TemperatureDisplayValue = day.Temperature * temperatureMultiplier;
+                ColorInitializer(ref day);
                 day.DayOfTheWeek = day.ExactDay.DayOfWeek.ToString();
                 days.Add(day);
             }
             return days;
+        }
+
+        public void ColorInitializer(ref Day day)
+        {
+
+            if(day.Temperature >= 35)
+            {
+                day.ColumnColor = "FireBrick";
+            }
+            else if(day.Temperature < 35 && day.Temperature >= 30)
+            {
+                day.ColumnColor = "Red";
+            }
+            else if (day.Temperature < 30 && day.Temperature >= 25)
+            {
+                day.ColumnColor = "Tomato";
+            }
+            else if (day.Temperature < 25 && day.Temperature >= 20)
+            {
+                day.ColumnColor = "Salmon";
+            }
+            else if (day.Temperature < 20 && day.Temperature >= 15)
+            {
+                day.ColumnColor = "Purple";
+            }
+            else if (day.Temperature < 15 && day.Temperature >= 10)
+            {
+                day.ColumnColor = "LightSkyBlue";
+            }
+            else
+            {
+                day.ColumnColor = "Blue";
+            }
         }
     }
 }
