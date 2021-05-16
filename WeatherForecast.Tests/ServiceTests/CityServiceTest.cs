@@ -116,6 +116,25 @@ namespace WeatherForecast.Tests.ServiceTests
             Assert.NotNull(actualDays);
             Assert.Equal(expectedCount, actualDays.Count);
         }
+
+        [Fact]
+        public void ColorInitializer_ShouldReturnColorName()
+        {
+            //Arrange
+            Day day = new Day
+            {
+                Temperature = 26
+            };
+            var expectedColorName = "Tomato";
+
+            //Act
+            service.ColorInitializer(ref day);
+
+            //Assert
+            Assert.Equal(expectedColorName, day.ColumnColor);
+            
+
+        }
         
     }
 }
