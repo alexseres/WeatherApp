@@ -11,8 +11,8 @@
       Title="MainView">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -23,10 +23,44 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBox Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="200,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="43" Width="127" Command="{Binding SearchCommand}"/>
-            <TextBlock Text="{Binding Path=ExceptionMessage}" Foreground="Red" Grid.Row="2"> </TextBlock>
+            <TextBox Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="0"
+                     Grid.Row="1" Margin="32,0,224,7" Grid.RowSpan="2"
+                     BorderThickness="3"
+                     BorderBrush="Yellow"
+                     Foreground="DarkGray"
+                     Background="LightSkyBlue"
+                     FontFamily="Courier">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button Content="Button"
+                    Grid.Row="1"
+                    HorizontalAlignment="Left"
+                    Margin="181,0,0,7"
+                    Width="56"
+                    Command="{Binding SearchCommand}"
+                    BorderBrush="Yellow"
+                    BorderThickness="3"
+                    Background="LightSkyBlue"
+                    Foreground="Gray"
+                    Grid.RowSpan="2"
+                    FontFamily="Courier">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock Text="{Binding Path=ExceptionMessage}"
+                       Foreground="Red"
+                       Grid.Row="3" Margin="0,4,136,-5"
+                       FontFamily="Courier"></TextBlock>
 
             <StackPanel Grid.Column="1">
                 <TextBlock Text="{Binding Path=City.Name}" />
