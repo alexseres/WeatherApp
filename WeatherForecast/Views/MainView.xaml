@@ -1,0 +1,157 @@
+﻿<Page x:Class="WeatherForecast.Views.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WeatherForecast.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      WindowHeight="560"
+      WindowWidth="850"
+      Title="MainView"
+      FontFamily="Courier"
+      Background="DimGray">
+    
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBox Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="0"
+                     Width="143"
+                     Height="25"
+                     Grid.Row="3"
+                     Margin="38,72,218,-57"
+                     BorderThickness="3"
+                     BorderBrush="Gold"
+                     Foreground="DarkSlateGray"
+                     Background="LightSkyBlue">
+                <TextBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <Button Content="Search"
+                    Grid.Row="3"
+                    HorizontalAlignment="Left"
+                    Margin="187,72,0,-57"
+                    Width="56"
+                    Command="{Binding SearchCommand}"
+                    BorderBrush="Gold"
+                    BorderThickness="3"
+                    Background="LightSkyBlue"
+                    Foreground="DarkSlateGray"
+                    FontFamily="Courier">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <TextBlock Text="{Binding Path=ExceptionMessage}"
+                       Foreground="Red"
+                       Grid.Row="3" Margin="38,102,98,-104"
+                       FontFamily="Courier"></TextBlock>
+
+            <StackPanel Grid.Column="1"
+                        Margin="40,83,92,-154"
+                        Grid.Row="3"
+                        Width="200"
+                        Visibility="{Binding Path=VisibilityOfCard}">
+                <Border BorderThickness="5"
+                        BorderBrush="Gold"
+                        Background="SkyBlue">
+                    <Border.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Border.Resources>
+                    <Grid Height="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0"
+                                    Margin="0,0,2,0"
+                                    Grid.ColumnSpan="2">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Path=City.Name}" Grid.Row="0" Foreground="DarkSlateGray"/>
+                                <TextBlock Text="{Binding Path=City.Date}" Grid.Row="1" Foreground="DarkSlateGray"/>
+                                <TextBlock Text="{Binding Path=City.DayOfTheWeek}" Grid.Row="2" Foreground="DarkSlateGray"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Bottom">
+                            <TextBlock Text="{Binding Path=City.Temperature}" FontSize="40" Foreground="DarkSlateGray"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="38,0,0,0"
+                       Grid.Row="3"
+                       Text="wApp"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       Height="40"
+                       Width="144"
+                       FontSize="30"
+                       Foreground="Gold"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Path=Days}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Width="600"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="10, 0, 10, 0" VerticalAlignment="Bottom" >
+
+                            <TextBlock Text="{Binding Path=Temperature}"
+                                       HorizontalAlignment="Center"
+                                       
+                                       />
+                            <Border Name="br"
+                                    Margin="3,0,3,25"
+                                    CornerRadius="2" 
+                                    Background="{Binding Path=ColumnColor}"
+                                    Width="40"
+                                    Height="{Binding TemperatureDisplayValue}">
+                            </Border>
+                            <TextBlock HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Bottom"
+                                       Text="{Binding Path=DayOfTheWeek}">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform Y="-20"/>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Grid>
+</Page>
