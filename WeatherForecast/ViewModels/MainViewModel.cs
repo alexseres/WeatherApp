@@ -13,6 +13,8 @@ namespace WeatherForecast.ViewModels
     public class MainViewModel : BaseViewModel
     {
         #region Properties
+        private string _visibilityOfCard;
+        public string VisibilityOfCard { get { return _visibilityOfCard; } set { SetProperty(ref _visibilityOfCard, value); } }
         private string _exceptionMessage;
         public string ExceptionMessage { get { return _exceptionMessage; } set { SetProperty(ref _exceptionMessage, value); } }
         private int _doubleTemperatureForDisplay;
@@ -38,7 +40,8 @@ namespace WeatherForecast.ViewModels
 
         public MainViewModel()
         {
-            //initialize command and instantiate quientessential properties 
+            //initialize command and instantiate quientessential properties
+            VisibilityOfCard = "Hidden";
             SearchCommand = new RelayCommand(SearchRequest, true);
             ClientManager = new HttpClientManager();
             Service = new CityService(ClientManager);
@@ -54,10 +57,12 @@ namespace WeatherForecast.ViewModels
                     if (ExceptionMessage != null) ExceptionMessage = "";
                     City = await Service.CreateAndGetObjects(SearchInput);
                     Days = City.Days;
+                    VisibilityOfCard = "Visible";
                 }
                 catch(HttpRequestException ex) when (ex.Message.Contains("401"))
                 {
                     ExceptionMessage = "APIkey is wrong or expired";
+                    VisibilityOfCard = "Hidden";
                     if (City != null && Days != null)
                     {
                         City = null;
@@ -67,6 +72,7 @@ namespace WeatherForecast.ViewModels
                 catch(HttpRequestException ex) when (ex.Message.Contains("host"))
                 {
                     ExceptionMessage = "No connection made";
+                    VisibilityOfCard = "Hidden";
                     if (City != null && Days != null)
                     {
                         City = null;
@@ -77,7 +83,8 @@ namespace WeatherForecast.ViewModels
                 {
                     //when the api cannot handle the request because of nonexistent input
                     ExceptionMessage = "There is no such a City";
-                    if(City !=null && Days != null)
+                    VisibilityOfCard = "Hidden";
+                    if (City !=null && Days != null)
                     {
                         City = null;
                         Days = null;
@@ -87,6 +94,7 @@ namespace WeatherForecast.ViewModels
                 {
                     //if some property is missing eg: one of the temperature of the day is null
                     ExceptionMessage = "Some Property is missing, try with another city";
+                    VisibilityOfCard = "Hidden";
                     if (City != null && Days != null)
                     {
                         City = null;
@@ -97,6 +105,7 @@ namespace WeatherForecast.ViewModels
                 {
                     //if any other exception happens 
                     ExceptionMessage = "Unexpected error happened, try with another city or leave the application";
+                    VisibilityOfCard = "Hidden";
                     if (City != null && Days != null)
                     {
                         City = null;
